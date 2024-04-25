@@ -3,16 +3,13 @@ import React from "react";
 export default function ReservationForm() {
   return (
     <div className="row g-1">
-      <div className="col-12">
-        <label htmlFor="numberOfPeople" className="form-label">
-          Number of People
-        </label>
+      <div className="col-12 mb-2">
         <div className="input-group">
           <span className="input-group-text">
             <i className="bi bi-people"></i>
           </span>
           <select id="numberOfPeople" className="form-select">
-            <option value=""> Select number of people</option>
+            <option value=""> Select number of people </option>
             <option value="2">2 persons</option>
             <option value="3">3 persons</option>
             <option value="4">4 persons</option>
@@ -22,16 +19,13 @@ export default function ReservationForm() {
           <div className="invalid-feedback">Please select the number of people</div>
         </div>
       </div>
-      <div className="col-12">
-        <label htmlFor="date" className="form-label">
-          Date
-        </label>
+      <div className="col-12 mb-2">
         <div className="input-group">
           <span className="input-group-text">
             <i className="bi bi-calendar"></i>
           </span>
           <select id="select" className="form-select">
-            <option value=""> Select date</option>
+            <option value=""> Select date </option>
             <option value="2024-10-01">October 1, 2024</option>
             <option value="2024-10-02">October 2, 2024</option>
             <option value="2024-10-03">October 3, 2024</option>
@@ -41,10 +35,7 @@ export default function ReservationForm() {
           <div className="invalid-feedback">Please select the date</div>
         </div>
       </div>
-      <div className="col-12">
-        <label htmlFor="time" className="form-label">
-          Time
-        </label>
+      <div className="col-12 mb-2">
         <div className="input-group">
           <span className="input-group-text">
             <i className="bi bi-clock"></i>
@@ -60,10 +51,7 @@ export default function ReservationForm() {
           <div className="invalid-feedback">Please select the time</div>
         </div>
       </div>
-      <div className="col-12">
-        <label htmlFor="name" className="form-label">
-          Comments
-        </label>
+      <div className="col-12 mb-2">
         <div className="input-group">
           <span className="input-group-text align-items-start">
             <i className="bi bi-card-text"></i>

@@ -1,5 +1,6 @@
 "use client";
 
+import ConfirmForm from "./components/form/ConfirmForm";
 import ContactForm from "./components/form/ContactForm";
 import ReservationForm from "./components/form/ReservationForm";
 import useReservation from "./hooks/useReservation";
@@ -14,7 +15,7 @@ export default function ReservationIndexPage() {
       case "contact":
         return <ContactForm />;
       case "confirmation":
-        return <></>;
+        return <ConfirmForm />;
     }
   };
 
@@ -25,7 +26,7 @@ export default function ReservationIndexPage() {
         <div className="modal-dialog" role="form">
           <div className="modal-content rounded-4 shadow">
             <div className="modal-header border-bottom-0">
-              <h1 className="modal-title fs-5">Table Reservation</h1>
+              <h1 className="modal-title fs-5">{currentStepConfig.title}</h1>
             </div>
             <div className="modal-body py-0">{renderStep()}</div>
             <div className="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">

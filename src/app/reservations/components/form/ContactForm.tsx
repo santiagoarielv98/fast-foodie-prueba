@@ -1,13 +1,8 @@
 import React from "react";
 
-import clsx from "clsx";
-
-export default React.forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(function ContactForm(
-  { className, ...rest },
-  ref
-) {
+export function ContactForm() {
   return (
-    <div className={clsx("row g-1", className)} {...rest} ref={ref}>
+    <div className="row g-1">
       <div className="col-12 mb-2">
         <div className="input-group">
           <span className="input-group-text">
@@ -56,4 +51,4 @@ export default React.forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>
       </div>
     </div>
   );
-});
+}

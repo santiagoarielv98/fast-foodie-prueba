@@ -69,26 +69,3 @@ export default function ReservationForm() {
     </div>
   );
 }
-
-export function Modal() {
-  return (
-    <div className="modal position-static d-block" tabIndex={-1} role="dialog">
-      <div className="modal-dialog" role="form">
-        <div className="modal-content rounded-4 shadow">
-          <div className="modal-header border-bottom-0">
-            <h1 className="modal-title fs-5">Table Reservation</h1>
-          </div>
-          <div className="modal-body py-0"></div>
-          <div className="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
-            <button type="button" className="btn btn-lg btn-primary">
-              Save changes
-            </button>
-            <button type="button" className="btn btn-lg btn-secondary" data-bs-dismiss="modal">
-              Close
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}

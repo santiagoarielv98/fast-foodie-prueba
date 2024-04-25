@@ -1,6 +1,6 @@
 import React from "react";
 
-export function ContactForm() {
+export default function ContactForm() {
   return (
     <div className="row g-1">
       <div className="col-12 mb-2">

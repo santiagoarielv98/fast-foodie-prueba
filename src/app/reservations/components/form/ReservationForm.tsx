@@ -1,6 +1,16 @@
 import React from "react";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { ReservationSchemaValues } from "../../schemas/reservation-schema";
 
-export default function ReservationForm() {
+export interface ReservationFormProps {
+  register: UseFormRegister<ReservationSchemaValues>;
+  values?: ReservationSchemaValues;
+  errors?: FieldErrors<ReservationSchemaValues>;
+}
+
+export default function ReservationForm(props: ReservationFormProps) {
+  const { register, values, errors } = props;
+  console.log(errors);
   return (
     <div className="row g-1">
       <div className="col-12 mb-2">
@@ -8,7 +18,7 @@ export default function ReservationForm() {
           <span className="input-group-text">
             <i className="bi bi-people"></i>
           </span>
-          <select id="numberOfPeople" className="form-select">
+          <select id="numberOfPeople" className="form-select" {...register("numberOfPeople")}>
             <option value=""> Select number of people </option>
             <option value="2">2 persons</option>
             <option value="3">3 persons</option>
@@ -16,7 +26,7 @@ export default function ReservationForm() {
             <option value="5">5 persons</option>
             <option value="6">6 persons</option>
           </select>
-          <div className="invalid-feedback">Please select the number of people</div>
+          {errors?.numberOfPeople && <div className="invalid-feedback d-block">Please select the number of people</div>}
         </div>
       </div>
       <div className="col-12 mb-2">
@@ -24,7 +34,7 @@ export default function ReservationForm() {
           <span className="input-group-text">
             <i className="bi bi-calendar"></i>
           </span>
-          <select id="select" className="form-select">
+          <select id="date" className="form-select" {...register("date")}>
             <option value=""> Select date </option>
             <option value="2024-10-01">October 1, 2024</option>
             <option value="2024-10-02">October 2, 2024</option>
@@ -32,7 +42,7 @@ export default function ReservationForm() {
             <option value="2024-10-04">October 4, 2024</option>
             <option value="2024-10-05">October 5, 2024</option>
           </select>
-          <div className="invalid-feedback">Please select the date</div>
+          {errors?.date && <div className="invalid-feedback d-block">Please select the date</div>}
         </div>
       </div>
       <div className="col-12 mb-2">
@@ -40,15 +50,15 @@ export default function ReservationForm() {
           <span className="input-group-text">
             <i className="bi bi-clock"></i>
           </span>
-          <select id="time" className="form-select">
+          <select id="time" className="form-select" {...register("time")}>
             <option value=""> Select time</option>
-            <option value="08:00">8:00 AM</option>
-            <option value="09:00">9:00 AM</option>
-            <option value="10:00">10:00 AM</option>
-            <option value="11:00">11:00 AM</option>
-            <option value="12:00">12:00 PM</option>
+            <option value="08:00:00">8:00 AM</option>
+            <option value="09:00:00">9:00 AM</option>
+            <option value="10:00:00">10:00 AM</option>
+            <option value="11:00:00">11:00 AM</option>
+            <option value="12:00:00">12:00 PM</option>
           </select>
-          <div className="invalid-feedback">Please select the time</div>
+          {errors?.time && <div className="invalid-feedback d-block">Please select the time</div>}
         </div>
       </div>
       <div className="col-12 mb-2">
@@ -62,8 +72,9 @@ export default function ReservationForm() {
             placeholder="Comments (optional)"
             maxLength={255}
             rows={3}
+            {...register("comments")}
           ></textarea>
-          <div className="invalid-feedback">Please enter your name</div>
+          {errors?.comments && <div className="invalid-feedback d-block">Please enter your comments</div>}
         </div>
       </div>
     </div>

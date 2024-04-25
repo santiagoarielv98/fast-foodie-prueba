@@ -1,11 +1,10 @@
-import React from "react";
+import { useForm } from "react-hook-form";
+import { ReservationSchema, ReservationSchemaValues } from "../schemas/reservation-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import { stepContext } from "../contexts/StepContext";
-
-export default function useReservation() {
-  const context = React.useContext(stepContext);
-  if (context === undefined) {
-    throw new Error("useReservation must be used within a ReservationProvider");
-  }
-  return context;
+export default function useReservation(defaultValues?: Partial<ReservationSchemaValues>) {
+  return useForm<ReservationSchemaValues>({
+    resolver: zodResolver(ReservationSchema),
+    defaultValues,
+  });
 }

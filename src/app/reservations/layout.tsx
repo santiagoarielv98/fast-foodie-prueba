@@ -1,6 +1,6 @@
 import React from "react";
-import ReservationContext from "./contexts/ReservationContext";
+import StepContext from "./contexts/StepContext";
 
 export default function ReservationLayout({ children }: { children: React.ReactNode }) {
-  return <ReservationContext>{children}</ReservationContext>;
+  return <StepContext>{children}</StepContext>;
 }

@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import { ReservationState, StepReservation } from "../types/reservations";
+import { StepState, StepReservation } from "../types/reservations";
 
 import { stepConfigMap } from "../constants";
 
-export const reservationContext = React.createContext<ReservationState | undefined>(undefined);
+export const stepContext = React.createContext<StepState | undefined>(undefined);
 
-export default function ReservationContext({ children }: { children: React.ReactNode }) {
-  const [currentStep, setCurrentStep] = React.useState<StepReservation>("reservation");
+export default function StepContext({ children }: { children: React.ReactNode }) {
+  const [currentStep, setCurrentStep] = React.useState<StepReservation>("confirmation");
 
   const handleSubmit = React.useCallback(() => {
     switch (currentStep) {
@@ -44,5 +44,5 @@ export default function ReservationContext({ children }: { children: React.React
     [currentStep, handleSubmit, handleCancel]
   );
 
-  return <reservationContext.Provider value={values}>{children}</reservationContext.Provider>;
+  return <stepContext.Provider value={values}>{children}</stepContext.Provider>;
 }

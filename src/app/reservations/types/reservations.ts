@@ -8,7 +8,7 @@ export interface StepConfig {
 
 export type StepConfigMap = Record<StepReservation, StepConfig>;
 
-export type ReservationState = {
+export type StepState = {
   currentStep: StepReservation;
   currentStepConfig: StepConfig;
   onNext: () => void;

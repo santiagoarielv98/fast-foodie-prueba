@@ -8,7 +8,7 @@ import { stepConfigMap } from "../constants";
 export const stepContext = React.createContext<StepState | undefined>(undefined);
 
 export default function StepContext({ children }: { children: React.ReactNode }) {
-  const [currentStep, setCurrentStep] = React.useState<StepReservation>("contact");
+  const [currentStep, setCurrentStep] = React.useState<StepReservation>("confirmation");
 
   const handleSubmit = React.useCallback(() => {
     switch (currentStep) {

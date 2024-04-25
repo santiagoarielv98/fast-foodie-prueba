@@ -1,15 +1,13 @@
-import React from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { ContactSchemaValues } from "../../schemas/contact-schema";
 
 export interface ContactFormProps {
   register: UseFormRegister<ContactSchemaValues>;
-  values?: ContactSchemaValues;
   errors?: FieldErrors<ContactSchemaValues>;
 }
 
 export default function ContactForm(props: ContactFormProps) {
-  const { register, values, errors } = props;
+  const { register, errors } = props;
 
   return (
     <div className="row g-1">

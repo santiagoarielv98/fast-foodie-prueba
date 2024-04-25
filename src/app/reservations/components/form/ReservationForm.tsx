@@ -1,16 +1,14 @@
-import React from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { ReservationSchemaValues } from "../../schemas/reservation-schema";
 
 export interface ReservationFormProps {
   register: UseFormRegister<ReservationSchemaValues>;
-  values?: ReservationSchemaValues;
   errors?: FieldErrors<ReservationSchemaValues>;
 }
 
 export default function ReservationForm(props: ReservationFormProps) {
-  const { register, values, errors } = props;
-  console.log(errors);
+  const { register, errors } = props;
+
   return (
     <div className="row g-1">
       <div className="col-12 mb-2">

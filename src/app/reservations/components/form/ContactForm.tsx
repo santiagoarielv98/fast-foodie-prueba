@@ -1,9 +1,19 @@
 import React from "react";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { ContactSchemaValues } from "../../schemas/contact-schema";
 
-export default function ContactForm() {
+export interface ContactFormProps {
+  register: UseFormRegister<ContactSchemaValues>;
+  values?: ContactSchemaValues;
+  errors?: FieldErrors<ContactSchemaValues>;
+}
+
+export default function ContactForm(props: ContactFormProps) {
+  const { register, values, errors } = props;
+
   return (
     <div className="row g-1">
-      <div className="col-12 mb-2">
+      <div className="col-12 col-md-6 mb-2 pe-md-0">
         <div className="input-group">
           <span className="input-group-text">
             <i className="bi bi-person"></i>
@@ -11,21 +21,23 @@ export default function ContactForm() {
           <input
             type="text"
             id="name"
-            className="form-control"
+            className="form-control min-[576px]:!tw-rounded-r-none"
             placeholder="Enter your name..."
             autoComplete="given-name"
-          />
-          <input
-            type="text"
-            id="lastName"
-            className="form-control d-none d-md-inline"
-            placeholder="Enter your last name..."
-            autoComplete="family-name"
+            {...register("name")}
           />
         </div>
+        {errors?.name && <div className="invalid-feedback d-block">Please enter your name.</div>}
       </div>
-      <div className="col-12 d-md-none d-block mb-2">
-        <input type="text" id="lastName-2" className="form-control" placeholder="Enter your last name..." />
+      <div className="col-12 col-md-6 mb-2 ps-md-0 z-0">
+        <input
+          type="text"
+          id="lastName-2"
+          className="form-control min-[576px]:!tw-rounded-l-none"
+          placeholder="Enter your last name..."
+          autoComplete="family-name"
+          {...register("lastName")}
+        />
       </div>
       <div className="col-12 mb-2">
         <div className="input-group">
@@ -38,16 +50,26 @@ export default function ContactForm() {
             className="form-control"
             placeholder="Enter your email..."
             autoComplete="email"
+            {...register("email")}
           />
         </div>
+        {errors?.email && <div className="invalid-feedback d-block">Please enter a valid email.</div>}
       </div>
       <div className="col-12 mb-2">
         <div className="input-group">
           <span className="input-group-text">
             <i className="bi bi-telephone"></i>
           </span>
-          <input type="tel" id="phone" className="form-control" placeholder="Enter your phone..." autoComplete="tel" />
+          <input
+            type="tel"
+            id="phone"
+            className="form-control"
+            placeholder="Enter your phone..."
+            autoComplete="tel"
+            {...register("phone")}
+          />
         </div>
+        {errors?.phone && <div className="invalid-feedback d-block">Please enter a valid phone number.</div>}
       </div>
     </div>
   );

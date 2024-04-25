@@ -3,6 +3,7 @@
 import ConfirmForm from "./components/form/ConfirmForm";
 import ContactForm from "./components/form/ContactForm";
 import ReservationForm from "./components/form/ReservationForm";
+import useContact from "./hooks/useContact";
 import useReservation from "./hooks/useReservation";
 import useStep from "./hooks/useStep";
 
@@ -21,10 +22,22 @@ export default function ReservationIndexPage() {
     time: "08:00:00",
   });
 
+  const {
+    register: registerContact,
+    formState: { errors: contactErrors, isValid: isContactValid },
+    getValues: getContactValues,
+    handleSubmit: handleContactSubmit,
+  } = useContact();
+
   const handleSubmit = () => {
     switch (currentStep) {
       case "reservation":
         return handleReservationSubmit((values) => {
+          console.log(values);
+          onNext();
+        });
+      case "contact":
+        return handleContactSubmit((values) => {
           console.log(values);
           onNext();
         });
@@ -38,7 +51,7 @@ export default function ReservationIndexPage() {
       case "reservation":
         return <ReservationForm register={registerReservation} errors={reservationErrors} />;
       case "contact":
-        return <ContactForm />;
+        return <ContactForm register={registerContact} errors={contactErrors} />;
       case "confirmation":
         return <ConfirmForm />;
     }
@@ -55,7 +68,7 @@ export default function ReservationIndexPage() {
             </div>
             <div className="modal-body py-0">{renderStep()}</div>
             <div className="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
-              <button type="submit" className="btn btn-lg btn-primary" disabled={!isReservationValid}>
+              <button type="submit" className="btn btn-lg btn-primary">
                 {currentStepConfig.confirmButtonLabel ?? "Next"}
               </button>
               <button type="button" className="btn btn-lg btn-secondary" data-bs-dismiss="modal" onClick={onBack}>

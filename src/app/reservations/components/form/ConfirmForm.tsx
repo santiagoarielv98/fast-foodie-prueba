@@ -5,11 +5,32 @@ import React from "react";
 import { Button, Collapse, ListGroup } from "react-bootstrap";
 import ContactForm from "./ContactForm";
 import clsx from "clsx";
+import useContact from "../../hooks/useContact";
+import useReservation from "../../hooks/useReservation";
 
 export default function ConfirmForm() {
   const [openContact, setOpenContact] = React.useState(false);
   const [openTableSize, setOpenTableSize] = React.useState(false);
   const [openTimeChoice, setOpenTimeChoice] = React.useState(false);
+
+  const {
+    register: registerReservation,
+    formState: { errors: reservationErrors, isValid: isReservationValid },
+    getValues: getReservationValues,
+    handleSubmit: handleReservationSubmit,
+  } = useReservation({
+    date: "2024-10-01",
+    comments: "",
+    numberOfPeople: 2,
+    time: "08:00:00",
+  });
+
+  const {
+    register: registerContact,
+    formState: { errors: contactErrors, isValid: isContactValid },
+    getValues: getContactValues,
+    handleSubmit: handleContactSubmit,
+  } = useContact();
 
   const toggleContact = () => setOpenContact(!openContact);
   const toggleTableSize = () => setOpenTableSize(!openTableSize);
@@ -42,7 +63,7 @@ export default function ConfirmForm() {
           </Collapse>
           <Collapse in={openContact}>
             <div>
-              <ContactForm className="mb-1" />
+              <ContactForm register={registerContact} errors={contactErrors} />
               <Button variant="primary" size="lg" onClick={toggleContact} className="w-100">
                 Save
               </Button>

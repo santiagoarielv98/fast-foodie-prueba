@@ -34,7 +34,7 @@ export default function ConfirmForm(props: ConfirmFormProps) {
   const toggleTimeChoice = () => setOpenTimeChoice(!openTimeChoice);
 
   const onSaveContact = () => {
-    if (onSave?.("contact") === true) {
+    if (onSave?.("contact")) {
       setOpenContact(false);
     }
   };

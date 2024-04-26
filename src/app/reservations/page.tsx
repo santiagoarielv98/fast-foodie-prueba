@@ -54,25 +54,13 @@ export default function ReservationIndexPage() {
   const handleCancel = (formSave: string) => {
     switch (formSave) {
       case "contact":
-        const contactValues = contactForm.getValues();
-        confirmForm.setValue("name", contactValues.name);
-        confirmForm.setValue("lastName", contactValues.lastName);
-        confirmForm.setValue("email", contactValues.email);
-        confirmForm.setValue("phone", contactValues.phone);
+        break;
     }
   };
 
   const handleSave = (formSave: string) => {
     switch (formSave) {
       case "contact":
-        if (!confirmForm.formState.isValid) return false;
-        contactForm.setValue("name", values.name);
-        contactForm.setValue("lastName", values.lastName);
-        contactForm.setValue("email", values.email);
-        confirmForm.setValue("name", values.name);
-        confirmForm.setValue("lastName", values.lastName);
-        confirmForm.setValue("email", values.email);
-        confirmForm.setValue("phone", values.phone);
         return true;
       default:
         return false;

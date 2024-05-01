@@ -3,15 +3,13 @@ import React from "react";
 import { UseFormReturn } from "react-hook-form";
 
 import ContactForm from "./contact-form";
-import ReserveForm from "./reserva-form";
 import MultiCollapseEdit from "./multi-collapse-edit";
 
 import type { ConfirmationSchemaValues } from "../schemas/confirmation-schema";
 import type { ContactSchemaValues } from "../schemas/contact-schema";
-import type { ReservationSchemaValues } from "../schemas/reservation-schema";
 
-import type { FormType, Step } from "../types/step";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
+import type { FormType } from "../types/step";
 
 export interface ConfirmationFormProps {
   form: UseFormReturn<ConfirmationSchemaValues>;
@@ -20,6 +18,7 @@ export interface ConfirmationFormProps {
 
 export default function ConfirmationForm({ form, onClose }: ConfirmationFormProps) {
   const [open, setOpen] = React.useState<boolean | FormType>(false);
+  const values = form.getValues();
 
   const handleSave = (formtype: FormType) => {
     form.trigger().then((isValid) => {
@@ -40,8 +39,6 @@ export default function ConfirmationForm({ form, onClose }: ConfirmationFormProp
     onClose?.();
     handleToggle(formtype);
   };
-
-  const values = form.getValues();
 
   return (
     <div>
@@ -70,9 +67,6 @@ export default function ConfirmationForm({ form, onClose }: ConfirmationFormProp
               onSave={() => {
                 handleSave("contact");
               }}
-              onClose={() => {
-                handleClose("contact");
-              }}
             />
           </>
         }
@@ -97,14 +91,7 @@ export default function ConfirmationForm({ form, onClose }: ConfirmationFormProp
                 <option value="6">6 people</option>
               </Form.Select>
             </FloatingLabel>
-            <ActionButtons
-              onSave={() => {
-                handleSave("numberOfPeople");
-              }}
-              onClose={() => {
-                handleClose("numberOfPeople");
-              }}
-            />
+            <ActionButtons onSave={() => handleSave("numberOfPeople")} />
           </>
         }
       />
@@ -144,14 +131,7 @@ export default function ConfirmationForm({ form, onClose }: ConfirmationFormProp
                 <option value="14:00:00">2:00 PM</option>
               </Form.Select>
             </FloatingLabel>
-            <ActionButtons
-              onSave={() => {
-                handleSave("datetime");
-              }}
-              onClose={() => {
-                handleClose("datetime");
-              }}
-            />
+            <ActionButtons onSave={() => handleSave("datetime")} />
           </>
         }
       />
@@ -160,17 +140,13 @@ export default function ConfirmationForm({ form, onClose }: ConfirmationFormProp
 }
 export interface ActionButtonsProps {
   onSave: () => void;
-  onClose: () => void;
 }
 
-function ActionButtons({ onSave, onClose }: ActionButtonsProps) {
+function ActionButtons({ onSave }: ActionButtonsProps) {
   return (
     <div className="d-flex gap-2">
       <Button variant="primary" type="submit" onClick={onSave}>
         Save
-      </Button>
-      <Button variant="secondary" onClick={onClose}>
-        Cancel
       </Button>
     </div>
   );

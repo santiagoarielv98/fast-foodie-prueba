@@ -5,7 +5,7 @@ import useCreateReservation from "./hooks/useCreateReservation";
 import { Button, Modal } from "react-bootstrap";
 import ConfirmationForm from "./components/confirmation-form";
 import ContactForm from "./components/contact-form";
-import ReserveForm from "./components/reserva-form";
+import ReservationForm from "./components/reservation-form";
 
 import { FormState } from "react-hook-form";
 import type { StepConfig } from "./types/step";
@@ -42,7 +42,7 @@ export default function ReservePage() {
   const renderStep = () => {
     switch (step) {
       case "reservation":
-        return <ReserveForm form={reservationForm} />;
+        return <ReservationForm form={reservationForm} />;
       case "contact":
         return <ContactForm form={contactForm} />;
       case "confirmation":

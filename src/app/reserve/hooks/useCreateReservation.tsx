@@ -1,7 +1,7 @@
 import React from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { FormState, useForm } from "react-hook-form";
 
 import { confirmationSchema, type ConfirmationSchemaValues } from "../schemas/confirmation-schema";
 import { contactSchema, type ContactSchemaValues } from "../schemas/contact-schema";
@@ -35,6 +35,17 @@ export default function useCreateReservation() {
   const contactForm = useForm<ContactSchemaValues>({
     resolver: zodResolver(contactSchema),
   });
+
+  const isDisabled = () => {
+    switch (step) {
+      case "reservation":
+        return validateIsDisabled(reservationForm.formState);
+      case "contact":
+        return validateIsDisabled(contactForm.formState);
+      case "confirmation":
+        return validateIsDisabled(confirmationForm.formState);
+    }
+  };
 
   const nextStep = () => {
     switch (step) {
@@ -85,7 +96,12 @@ export default function useCreateReservation() {
     reservationForm,
     step,
     cancelForm,
+    isDisabled,
     nextStep,
     prevStep,
   };
+}
+
+function validateIsDisabled(formState: FormState<{}>) {
+  return !formState.isValid || formState.isSubmitting;
 }

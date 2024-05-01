@@ -7,7 +7,6 @@ import ConfirmationForm from "./components/confirmation-form";
 import ContactForm from "./components/contact-form";
 import ReservationForm from "./components/reservation-form";
 
-import { FormState } from "react-hook-form";
 import type { StepConfig } from "./types/step";
 
 export const stepConfig: StepConfig = {
@@ -25,19 +24,8 @@ export const stepConfig: StepConfig = {
 };
 
 export default function ReservePage() {
-  const { reservationForm, contactForm, confirmationForm, step, cancelForm, nextStep, prevStep } =
+  const { reservationForm, contactForm, confirmationForm, step, cancelForm, isDisabled, nextStep, prevStep } =
     useCreateReservation();
-
-  const isDisabled = () => {
-    switch (step) {
-      case "reservation":
-        return validateIsDisabled(reservationForm.formState);
-      case "contact":
-        return validateIsDisabled(contactForm.formState);
-      case "confirmation":
-        return validateIsDisabled(confirmationForm.formState);
-    }
-  };
 
   const renderStep = () => {
     switch (step) {
@@ -71,8 +59,4 @@ export default function ReservePage() {
       </div>
     </form>
   );
-}
-
-function validateIsDisabled(formState: FormState<{}>) {
-  return !formState.isValid || formState.isSubmitting;
 }

@@ -7,8 +7,9 @@ export async function POST(request: Request) {
   const client = await clientPromise;
 
   const db = client.db();
-  const collection = db.collection("reservations");
 
+  const collection = db.collection("reservations");
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   await collection.insertOne(res);
 
   return Response.json({ res });

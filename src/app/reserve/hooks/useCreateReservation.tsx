@@ -8,6 +8,7 @@ import { contactSchema, type ContactSchemaValues } from "../schemas/contact-sche
 import { reservationSchema, type ReservationSchemaValues } from "../schemas/reservation-schema";
 
 import type { Step } from "../types/step";
+import { useRouter } from "next/navigation";
 
 const initialReservation: ConfirmationSchemaValues = {
   numberOfPeople: 0,
@@ -21,6 +22,8 @@ const initialReservation: ConfirmationSchemaValues = {
 };
 
 export default function useCreateReservation() {
+  const router = useRouter();
+  const [show, setShow] = React.useState(false);
   const [reservation, setReservation] = React.useState<ConfirmationSchemaValues>(initialReservation);
   const [step, setStep] = React.useState<Step>("reservation");
 
@@ -35,6 +38,8 @@ export default function useCreateReservation() {
   const contactForm = useForm<ContactSchemaValues>({
     resolver: zodResolver(contactSchema),
   });
+
+  const closeModal = () => setShow(false);
 
   const isDisabled = () => {
     switch (step) {
@@ -69,6 +74,7 @@ export default function useCreateReservation() {
           setReservation(newValues);
           reservationForm.reset(newValues);
           contactForm.reset(newValues);
+          setShow(true);
         });
     }
   };
@@ -90,11 +96,20 @@ export default function useCreateReservation() {
     confirmationForm.reset(reservation);
   };
 
+  const submitForm = async () => {
+    await fetch("/api/reserve", { body: JSON.stringify(reservation), method: "POST" });
+    closeModal();
+    router.push("/");
+  };
+
   return {
+    show,
     confirmationForm,
     contactForm,
     reservationForm,
     step,
+    closeModal,
+    submitForm,
     cancelForm,
     isDisabled,
     nextStep,
